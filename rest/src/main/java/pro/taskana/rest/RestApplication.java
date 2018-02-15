@@ -119,4 +119,8 @@ public class RestApplication {
         }
     }
 
+    @Bean
+    public WorkbasketDefinitionMapper getWorkbasketDefinitionMapper() {
+        return new WorkbasketDefinitionMapper();
+    }
 }
