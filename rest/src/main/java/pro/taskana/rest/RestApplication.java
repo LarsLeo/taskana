@@ -86,7 +86,7 @@ public class RestApplication {
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public TaskanaEngineConfiguration taskanaEngineConfiguration(DataSource dataSource) throws SQLException {
         TaskanaEngineConfiguration taskanaEngineConfiguration =
-            new SpringTaskanaEngineConfiguration(dataSource, true, true);
+            new SpringTaskanaEngineConfiguration(dataSource, true, false);
 
         new SampleDataGenerator(dataSource).generateSampleData();
 
