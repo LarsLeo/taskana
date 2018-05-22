@@ -1,5 +1,5 @@
 {
-  "taskanaRestUrl": "https://taskana-rest.mybluemix.net",
+  "taskanaRestUrl": "http://localhost:8080",
   "customizedFields": {
     "EN": {
       "workbaskets": {
