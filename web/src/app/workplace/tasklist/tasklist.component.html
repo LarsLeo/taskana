@@ -3,7 +3,7 @@
     <!--TODO: add toolbar for sorting, also add pagination-->
   <div>
     <ul #taskList id="task-list-container" class="list-group">
-      <li class="list-group-item" *ngIf="tasks === undefined || tasks.length === 0" type="text"> There are no Tasks for this workbasket </li>
+      <li class="list-group-item" *ngIf="tasks === undefined || tasks.length === 0" type="text"> There are either no Tasks for this workbasket or this workbasket does not exist</li>
       <li class="list-group-item" *ngFor="let task of tasks" [class.active]="task.taskId == selectedId"
           type="text" (click)="selectTask(task.taskId)">
         <div class="row">

@@ -46,4 +46,8 @@ export class TaskdetailsComponent implements OnInit {
   openTask(taskId: string) {
     this.router.navigate([{outlets: {detail: `task/${taskId}`}}], {relativeTo: this.route.parent});
   }
+
+  workOnTaskDisabled(): boolean {
+    return this.task === null ? false : this.task.state === "COMPLETED";
+  }
 }

@@ -3,7 +3,7 @@
   <div class="panel-heading">
     <div class="pull-right">
       <button type="button" title="Open task to work on it" class="btn btn-default" aria-label="Left Align"
-      (click)="openTask(task.taskId)">
+      [disabled]="workOnTaskDisabled()" (click)="openTask(task.taskId)">
         <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
       </button>
       <button type="button" title="Update Task" class="btn btn-default" (click)="updateTask()">

@@ -12,8 +12,8 @@ export class TaskService {
   constructor(private httpClient: HttpClient) {
   }
 
-  findTasksWithWorkbasket(basketKey: string): Observable<TaskResource> {
-    return this.httpClient.get<TaskResource>(`${this.url}?workbasket-id=${basketKey}`);
+  findTasksWithWorkbasket(basketId: string): Observable<TaskResource> {
+    return this.httpClient.get<TaskResource>(`${this.url}?workbasket-id=${basketId}`);
   }
 
   getTask(id: string): Observable<Task> {

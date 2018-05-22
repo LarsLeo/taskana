@@ -6,7 +6,8 @@ import {WorkbasketService} from 'app/services/workbasket/workbasket.service';
 
 @Component({
   selector: 'taskana-workbasket-selector',
-  templateUrl: './workbasket-selector.component.html'
+  templateUrl: './workbasket-selector.component.html',
+  styleUrls: ['./workbasket-selector.component.scss']
 })
 export class SelectorComponent implements OnInit {
 
@@ -14,11 +15,11 @@ export class SelectorComponent implements OnInit {
   tasksChanged = new EventEmitter<Task[]>();
 
   tasks: Task[] = [];
-
   autoCompleteData: string[] = [];
   result = '';
-  resultKey: string;
+  resultId: string;
   workbaskets: Workbasket[];
+  currentBasket: Workbasket;
 
   constructor(private taskService: TaskService,
               private workbasketService: WorkbasketService) {
@@ -31,28 +32,23 @@ export class SelectorComponent implements OnInit {
         this.autoCompleteData.push(workbasket.name);
       });
     });
-    if (this.workbasketService.workbasketKey) {
-      this.getTasks(this.workbasketService.workbasketKey);
-      this.result = this.workbasketService.workbasketName;
-    }
   }
 
   searchBasket() {
     if (this.workbaskets) {
       this.workbaskets.forEach(workbasket => {
         if (workbasket.name === this.result) {
-          this.resultKey = workbasket.workbasketId;
+          this.resultId = workbasket.workbasketId;
+          this.currentBasket = workbasket;
         }
       });
-      this.getTasks(this.resultKey);
-      this.workbasketService.workbasketKey = this.resultKey;
-      this.workbasketService.workbasketName = this.result;
+      this.getTasks(this.resultId);
       this.tasksChanged.emit(this.tasks);
     }
   }
 
-  getTasks(workbasketKey: string) {
-    this.taskService.findTasksWithWorkbasket(workbasketKey).subscribe(
+  getTasks(workbasketId: string) {
+    this.taskService.findTasksWithWorkbasket(workbasketId).subscribe(
       tasks => {
         if (!tasks || tasks._embedded === undefined) {
           this.tasks.length = 0;
@@ -60,5 +56,9 @@ export class SelectorComponent implements OnInit {
         }
         tasks._embedded.tasks.forEach(e => this.tasks.push(e));
       });
+  }
+
+  isDisabled(): boolean {
+    return (this.currentBasket === undefined ? (this.result.length === 0) : (this.currentBasket.name === this.result) || (this.result.length === 0));
   }
 }

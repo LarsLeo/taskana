@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-12">
     <div class="input-group">
-      <input class="form-control dropdown-toggle" auto-complete [(ngModel)]="result" [source]="autoCompleteData"
+      <input class="form-control dropdown-toggle high-priority" auto-complete [(ngModel)]="result" [source]="autoCompleteData"
              placeholder="Search for Workbasket ..."/>
       <span class="input-group-btn">
         <button class="btn btn-primary" type="button" (click)="searchBasket()"
-                [disabled]="result.length==0">Go!</button>
+                [disabled]="isDisabled()">Go!</button>
       </span>
     </div>
     <!-- /input-group -->
