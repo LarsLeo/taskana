@@ -13,9 +13,9 @@
             <dt data-toggle="tooltip" title="{{task.name}}">{{task.name}},
               <i data-toggle="tooltip" title="{{task.taskId}}">{{task.taskId}} </i>
             </dt>
-            <dd data-toggle="tooltip" title="{{task.due}}">Due: {{task.due}} &nbsp;</dd>
-            <dd data-toggle="tooltip" title="{{task.priority}}">Priority: {{task.priority}} &nbsp;</dd>
-            <dd data-toggle="tooltip" title="{{task.state}}">State: {{task.state}} &nbsp;</dd>
+            <dd data-toggle="tooltip" title="{{task.due}}">Due: {{task.due | date : 'dd.MM.yyyy HH:mm:ss'}}</dd>
+            <dd data-toggle="tooltip" title="{{task.priority}}">Priority: {{task.priority}}</dd>
+            <dd data-toggle="tooltip" title="{{task.state}}">State: {{task.state}}</dd>
           </dl>
         </div>
       </li>

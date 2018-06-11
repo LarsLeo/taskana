@@ -75,7 +75,7 @@ export class TaskComponent implements OnInit, OnDestroy {
         this.requestInProgress = false;
         this.task = task
       });
-    this.navigateBack();
+    this.backClicked();
   }
 
   completeTask() {
@@ -85,11 +85,11 @@ export class TaskComponent implements OnInit, OnDestroy {
         this.requestInProgress = false;
         this.task = task;
         this.taskService.publishUpdatedTask(task);
-        this.navigateBack();
+        this.backClicked();
       });
   }
 
-  navigateBack() {
+  backClicked() {
     this.router.navigate([{outlets: {detail: `taskdetail/${this.task.taskId}`}}], {relativeTo: this.route.parent});
   }
 

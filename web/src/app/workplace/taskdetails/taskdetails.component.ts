@@ -3,7 +3,7 @@ import {Task} from 'app/workplace/models/task';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskService} from 'app/workplace/services/task.service';
 import {Subscription} from 'rxjs/Subscription';
-import {Location} from '@angular/common';
+import {MasterAndDetailService} from "../../services/masterAndDetail/master-and-detail.service";
 
 @Component({
   selector: 'taskana-task-details',
@@ -13,19 +13,25 @@ import {Location} from '@angular/common';
 export class TaskdetailsComponent implements OnInit, OnDestroy {
   task: Task = null;
   requestInProgress = false;
+  showDetail = false;
 
   private routeSubscription: Subscription;
+  private masterAndDetailSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private taskService: TaskService,
               private router: Router,
-              private location: Location) {
+              private masterAndDetailService: MasterAndDetailService) {
   }
 
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe(params => {
       const id = params['id'];
       this.getTask(id);
+    });
+
+    this.masterAndDetailSubscription = this.masterAndDetailService.getShowDetail().subscribe(showDetail => {
+      this.showDetail = showDetail;
     });
   }
 
@@ -58,12 +64,20 @@ export class TaskdetailsComponent implements OnInit, OnDestroy {
     this.taskService.deleteTask(this.task).subscribe();
     this.taskService.publishDeletedTask(this.task);
     this.task = null;
-    this.router.navigate([`/workplace/tasks`]);
+    this.backClicked();
+  }
+
+  backClicked(): void {
+    this.taskService.publishSelectedTask('');
+    this.router.navigate(['./'], {relativeTo: this.route.parent});
   }
 
   ngOnDestroy(): void {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
+    }
+    if (this.masterAndDetailSubscription) {
+      this.masterAndDetailSubscription.unsubscribe();
     }
   }
 }

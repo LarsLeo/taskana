@@ -22,6 +22,7 @@ export class TasklistComponent implements OnInit, OnDestroy {
 
   private taskChangeSubscription: Subscription;
   private taskDeletedSubscription: Subscription;
+  private taskSelectedSubscription: Subscription;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -39,7 +40,10 @@ export class TasklistComponent implements OnInit, OnDestroy {
           this.tasks.splice(i, 1);
         }
       }
-    })
+    });
+    this.taskSelectedSubscription = this.taskService.taskSelectedStream.subscribe(taskId => {
+      this.selectedId = taskId;
+    });
   }
 
   ngOnInit() {
