@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {WorkplaceRoutingModule} from './workplace-routing.module';
-import {AlertModule, TypeaheadModule} from 'ngx-bootstrap';
+import {AlertModule, BsDatepickerModule, TypeaheadModule} from 'ngx-bootstrap';
 
 import {TaskListToolbarComponent} from './tasklist/tasklist-toolbar/tasklist-toolbar.component';
 import {TasklistComponent} from './tasklist/tasklist.component';
@@ -30,6 +30,7 @@ import {DatePipe} from '../shared/pipes/date/date-pipe';
 
 const MODULES = [
   TypeaheadModule.forRoot(),
+  BsDatepickerModule.forRoot(),
   CommonModule,
   FormsModule,
   HttpClientModule,

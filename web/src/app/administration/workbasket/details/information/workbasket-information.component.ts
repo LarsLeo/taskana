@@ -265,7 +265,7 @@ export class WorkbasketInformationComponent
   }
 
   private addDateToWorkbasket() {
-    const date = TaskanaDate.getDate();
+    const date = TaskanaDate.getCurrentDateString('ISO');
     this.workbasket.created = date;
     this.workbasket.modified = date;
   }

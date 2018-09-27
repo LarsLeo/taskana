@@ -23,7 +23,7 @@ export class ClassificationDefinitionService {
     this.httpClient.get<ClassificationDefinition[]>(this.url + domain)
       .subscribe(
         response => saveAs(new Blob([JSON.stringify(response)], { type: 'text/plain;charset=utf-8' }),
-          'Classifications_' + TaskanaDate.getDate() + '.json')
+          'Classifications_' + TaskanaDate.getCurrentDateString('ISO') + '.json')
       );
   }
 

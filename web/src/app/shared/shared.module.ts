@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { AlertModule } from 'ngx-bootstrap';
+import {AlertModule} from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { TreeModule } from 'angular-tree-component';
 import { TypeaheadModule } from 'ngx-bootstrap';

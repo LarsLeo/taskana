@@ -24,7 +24,7 @@ export class WorkbasketDefinitionService {
     this.httpClient.get<WorkbasketDefinition[]>(this.url + domain).subscribe(
       response => {
         saveAs(new Blob([JSON.stringify(response)], { type: 'text/plain;charset=utf-8' }),
-          'Workbaskets_' + TaskanaDate.getDate() + '.json');
+          'Workbaskets_' + TaskanaDate.getCurrentDateString('ISO') + '.json');
       }
     );
   }

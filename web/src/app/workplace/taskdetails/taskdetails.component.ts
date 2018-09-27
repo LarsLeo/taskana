@@ -113,7 +113,7 @@ export class TaskdetailsComponent implements OnInit, OnDestroy {
   }
 
   private addDateToTask() {
-    const date = TaskanaDate.getDate();
+    const date = TaskanaDate.getCurrentDateString('ISO');
     this.task.created = date;
     this.task.modified = date;
   }

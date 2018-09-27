@@ -237,7 +237,7 @@ export class ClassificationDetailsComponent implements OnInit, OnDestroy {
   }
 
   private addDateToClassification() {
-    const date = TaskanaDate.getDate();
+    const date = TaskanaDate.getCurrentDateString('ISO');
     this.classification.created = date;
     this.classification.modified = date;
   }

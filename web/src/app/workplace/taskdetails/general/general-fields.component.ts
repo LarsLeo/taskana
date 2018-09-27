@@ -20,6 +20,10 @@ export class TaskdetailsGeneralFieldsComponent implements OnInit {
   selectedClassification: Classification = new Classification();
   classifications: Classification[] = undefined;
 
+  // TODO
+  minDate = Date.now();
+  testDate: Date;
+
   constructor(private classificationService: ClassificationsService) {
   }
 
@@ -35,6 +39,7 @@ export class TaskdetailsGeneralFieldsComponent implements OnInit {
   @Input()
   set _task(task: Task) {
     this.task = task;
+    this.testDate = TaskanaDate.getDate(this.task.due);
     this.selectedClassification = task.classificationSummaryResource;
   }
 
@@ -43,15 +48,20 @@ export class TaskdetailsGeneralFieldsComponent implements OnInit {
     this.task.classificationSummaryResource = classification;
   }
 
-  validateDate(date: string) {
-    if (/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$/.test(date)) {
-      const bits = date.split('-').map(element => parseInt(element, 10));
-      const realDate = new Date(bits[0], bits[1], bits[2]);
-      const currentDate = TaskanaDate.convertSimpleDate(new Date()).toString();
-      if (realDate && date > currentDate) {
-        console.log('YAY!');
-        this.task.due = TaskanaDate.getISODate(new Date(date)).toString();
-      }
-    }
+  // validateDate(date: string) {
+  //   if (/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$/.test(date)) {
+  //     const bits = date.split('-').map(element => parseInt(element, 10));
+  //     const realDate = new Date(bits[0], bits[1], bits[2]);
+  //     const currentDate = TaskanaDate.convertSimpleDate(new Date()).toString();
+  //     if (realDate && date > currentDate) {
+  //       console.log('YAY!');
+  //       this.task.due = TaskanaDate.getISODate(new Date(date)).toString();
+  //     }
+  //   }
+  // }
+
+  setDate(date: Date) {
+    console.log(`setting to ${date}`);
+    this.task.due = TaskanaDate.getDateString(date, 'ISO');
   }
 }
